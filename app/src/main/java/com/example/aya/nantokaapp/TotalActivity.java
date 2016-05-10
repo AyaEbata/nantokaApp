@@ -26,14 +26,17 @@ public class TotalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        setMenuReturnButton();
+        initToolbar();
 
         displayLastMonth();
         displayLastMonthTotal();
         displayMoreOldTotal();
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setMenuReturnButton();
     }
 
     private void setMenuReturnButton() {
