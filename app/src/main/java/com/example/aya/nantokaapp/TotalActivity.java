@@ -69,7 +69,7 @@ public class TotalActivity extends AppCompatActivity {
     private List<String> getMonthTotalList() {
         List<String> monthTotalTextList = new ArrayList<>();
 
-        for (int i = 1; i <= 11; i++) {
+        for (int i = 1; i < 12; i++) {
             int month = getLastMonth() - i;
 
             if (month <= 0) {
