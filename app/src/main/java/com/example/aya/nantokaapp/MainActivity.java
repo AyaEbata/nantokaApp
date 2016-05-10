@@ -18,11 +18,12 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
 
     private static final int WASH_PRICE = 200;
+    private static final String KEY_TOTAL_FEE = "fee";
+    private static final String KEY_LAST_SHOW = "lastShow";
+    private static final String KEY_LAST_SHOW_YEAR = "lastShowYear";
+    private static final String KEY_LAST_SHOW_MONTH = "lastShowMonth";
+
     public static final String TIME_ZONE = "Asia/Tokyo";
-    public static final String KEY_TOTAL_FEE = "fee";
-    public static final String KEY_LAST_SHOW = "lastShow";
-    public static final String KEY_LAST_SHOW_YEAR = "lastShowYear";
-    public static final String KEY_LAST_SHOW_MONTH = "lastShowMonth";
     public static final String MONTH_TOTAL = "monthTotal";
 
     @Override
