@@ -43,10 +43,10 @@ public class TotalActivity extends AppCompatActivity {
 
     private void displayTotalHistory() {
         TextView lastMonth = (TextView) findViewById(R.id.last_month);
-        lastMonth.setText("先月（" + getLastMonth() + "月）、");
+        lastMonth.setText(getString(R.string.last_month, getLastMonth()));
 
         TextView lastMonthTotal = (TextView) findViewById(R.id.last_month_fee_text);
-        lastMonthTotal.setText(getPrefLastMonthTotal(getLastMonth()) + getString(R.string.yen));
+        lastMonthTotal.setText(getString(R.string.yen, getPrefLastMonthTotal(getLastMonth())));
 
         ArrayAdapter<String> adapter
                 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getMonthTotalList());
@@ -76,8 +76,8 @@ public class TotalActivity extends AppCompatActivity {
                 month = month + 12;
             }
 
-            monthTotalTextList.add(month + getString(R.string.month_total)
-                    + "     " + getPrefTotal(month) + getString(R.string.yen));
+            monthTotalTextList.add(getString(R.string.month_total, month)
+                    + "     " + getString(R.string.yen, getPrefTotal(month)));
         }
 
         return monthTotalTextList;

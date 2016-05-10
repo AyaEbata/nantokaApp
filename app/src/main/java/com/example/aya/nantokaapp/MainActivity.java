@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        text.setText(updatedFee + getString(R.string.yen));
+        text.setText(getString(R.string.yen, updatedFee));
 
         if (price != 0) {
             saveTotalFee(updatedFee);
