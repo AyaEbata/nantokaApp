@@ -28,9 +28,7 @@ public class TotalActivity extends AppCompatActivity {
 
         initToolbar();
 
-        displayLastMonth();
-        displayLastMonthTotal();
-        displayMoreOldTotal();
+        displayTotalHistory();
     }
 
     private void initToolbar() {
@@ -43,14 +41,18 @@ public class TotalActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void displayLastMonth() {
-        TextView text = (TextView) findViewById(R.id.last_month);
-        text.setText("先月（" + getLastMonth() + "月）、");
-    }
+    private void displayTotalHistory() {
+        TextView lastMonth = (TextView) findViewById(R.id.last_month);
+        lastMonth.setText("先月（" + getLastMonth() + "月）、");
 
-    private void displayLastMonthTotal() {
-        TextView text = (TextView) findViewById(R.id.last_month_fee_text);
-        text.setText(getPrefLastMonthTotal(getLastMonth()) + getString(R.string.yen));
+        TextView lastMonthTotal = (TextView) findViewById(R.id.last_month_fee_text);
+        lastMonthTotal.setText(getPrefLastMonthTotal(getLastMonth()) + getString(R.string.yen));
+
+        ArrayAdapter<String> adapter
+                = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getMonthTotalList());
+        ListView monthTotalListView = (ListView) findViewById(R.id.total_listView);
+        monthTotalListView.setAdapter(adapter);
+        monthTotalListView.setEnabled(false);
     }
 
     public int getLastMonth() {
@@ -62,14 +64,6 @@ public class TotalActivity extends AppCompatActivity {
     private int getPrefLastMonthTotal(int lastMonth) {
         SharedPreferences pref = getSharedPreferences(MainActivity.MONTH_TOTAL, Context.MODE_PRIVATE);
         return pref.getInt(String.valueOf(lastMonth), 0);
-    }
-
-    private void displayMoreOldTotal() {
-        ArrayAdapter<String> adapter
-                = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getMonthTotalList());
-        ListView listView = (ListView) findViewById(R.id.total_listView);
-        listView.setAdapter(adapter);
-        listView.setEnabled(false);
     }
 
     private List<String> getMonthTotalList() {
