@@ -28,7 +28,7 @@ public class TotalActivity extends AppCompatActivity {
 
         initToolbar();
 
-        displayTotalHistory();
+        setTotalHistory();
     }
 
     private void initToolbar() {
@@ -41,7 +41,7 @@ public class TotalActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void displayTotalHistory() {
+    private void setTotalHistory() {
         TextView lastMonth = (TextView) findViewById(R.id.last_month);
         lastMonth.setText(getString(R.string.last_month, getLastMonth()));
 
