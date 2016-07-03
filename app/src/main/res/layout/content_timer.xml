@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/start_button"
                 android:background="@color/colorAccent"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:layout_weight="0.3"
                 android:layout_marginRight="20dp" />
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/cancel_button"
                 android:background="@color/colorPrimary"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:layout_weight="0.3"
                 android:layout_marginLeft="20dp" />
 
