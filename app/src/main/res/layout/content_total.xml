@@ -23,7 +23,7 @@
             android:text="@string/last_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/default_text"
             android:typeface="normal"
             android:id="@+id/last_month" />
 
@@ -32,7 +32,7 @@
             android:text="@string/last_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="50dp"
+            android:textSize="@dimen/big_text"
             android:textColor="#333"
             android:gravity="center_horizontal"
             android:layout_marginTop="10dp"
@@ -43,7 +43,7 @@
             android:text="@string/ending_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="@dimen/default_text"
             android:typeface="normal" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="@string/more_before_total"
             android:id="@+id/textView"
-            android:textSize="18dp"
+            android:textSize="@dimen/default_text"
             android:textColor="#333"
             android:layout_marginTop="40dp" />
 
