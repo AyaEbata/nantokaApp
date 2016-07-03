@@ -103,6 +103,10 @@ public class TotalActivity extends AppCompatActivity {
                 finish();
                 break;
 
+            case R.id.action_top:
+                startActivity(new Intent(TotalActivity.this, MainActivity.class));
+                break;
+
             case R.id.action_timer:
                 startActivity(new Intent(TotalActivity.this, TimerActivity.class));
                 break;

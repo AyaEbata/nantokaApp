@@ -140,6 +140,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.action_top:
+                break;
+
             case R.id.action_reset:
                 resetTotalFee();
                 Toast.makeText(this, getString(R.string.reset_toast), Toast.LENGTH_LONG).show();

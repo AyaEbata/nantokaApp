@@ -1,5 +1,6 @@
 package com.example.aya.nantokaapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +42,10 @@ public class TimerActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+
+            case R.id.action_top:
+                startActivity(new Intent(TimerActivity.this, MainActivity.class));
                 break;
         }
 
