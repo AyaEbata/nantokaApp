@@ -101,9 +101,6 @@ public class TotalActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
-
-            default:
-                break;
         }
 
         return super.onOptionsItemSelected(item);

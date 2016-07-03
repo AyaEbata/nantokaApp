@@ -152,10 +152,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_timer:
                 startActivity(new Intent(MainActivity.this, TimerActivity.class));
                 break;
-
-            default:
-                // some action
-                break;
         }
 
         return super.onOptionsItemSelected(item);
