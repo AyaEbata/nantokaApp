@@ -47,6 +47,16 @@ public class TimerActivity extends AppCompatActivity {
             case R.id.action_top:
                 startActivity(new Intent(TimerActivity.this, MainActivity.class));
                 break;
+
+            case R.id.action_reset:
+                break;
+
+            case R.id.action_total:
+                startActivity(new Intent(TimerActivity.this, TotalActivity.class));
+                break;
+
+            case R.id.action_timer:
+                break;
         }
 
         return super.onOptionsItemSelected(item);
