@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
-        FloatingActionButton fabRemove = (FloatingActionButton) findViewById(R.id.fab_remove);
+        FloatingActionButton addFab = (FloatingActionButton) findViewById(R.id.fab_add);
+        FloatingActionButton removeFab = (FloatingActionButton) findViewById(R.id.fab_remove);
 
         totalOfLastMonth();
         initTotalFee();
 
-        fabAdd.setOnClickListener(view -> updateFee(WASH_PRICE));
-        fabRemove.setOnClickListener(view -> updateFee(-WASH_PRICE));
+        addFab.setOnClickListener(view -> updateFee(WASH_PRICE));
+        removeFab.setOnClickListener(view -> updateFee(-WASH_PRICE));
     }
 
     private void initTotalFee() {
