@@ -1,6 +1,7 @@
 package com.example.aya.nantokaapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -100,6 +101,10 @@ public class TotalActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+
+            case R.id.action_timer:
+                startActivity(new Intent(TotalActivity.this, TimerActivity.class));
                 break;
         }
 
