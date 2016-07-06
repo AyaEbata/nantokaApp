@@ -18,11 +18,12 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
 
     private static final int WASH_PRICE = 200;
+    private static final String KEY_TOTAL_FEE = "fee";
+    private static final String KEY_LAST_SHOW = "lastShow";
+    private static final String KEY_LAST_SHOW_YEAR = "lastShowYear";
+    private static final String KEY_LAST_SHOW_MONTH = "lastShowMonth";
+
     public static final String TIME_ZONE = "Asia/Tokyo";
-    public static final String KEY_TOTAL_FEE = "fee";
-    public static final String KEY_LAST_SHOW = "lastShow";
-    public static final String KEY_LAST_SHOW_YEAR = "lastShowYear";
-    public static final String KEY_LAST_SHOW_MONTH = "lastShowMonth";
     public static final String MONTH_TOTAL = "monthTotal";
 
     @Override
@@ -32,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.fab_add);
-        FloatingActionButton fabRemove = (FloatingActionButton) findViewById(R.id.fab_remove);
+        FloatingActionButton addFab = (FloatingActionButton) findViewById(R.id.fab_add);
+        FloatingActionButton removeFab = (FloatingActionButton) findViewById(R.id.fab_remove);
 
         totalOfLastMonth();
         initTotalFee();
 
-        fabAdd.setOnClickListener(view -> updateFee(WASH_PRICE));
-        fabRemove.setOnClickListener(view -> updateFee(-WASH_PRICE));
+        addFab.setOnClickListener(view -> updateFee(WASH_PRICE));
+        removeFab.setOnClickListener(view -> updateFee(-WASH_PRICE));
     }
 
     private void initTotalFee() {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        text.setText(updatedFee + getString(R.string.yen));
+        text.setText(getString(R.string.yen, updatedFee));
 
         if (price != 0) {
             saveTotalFee(updatedFee);
@@ -131,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -151,10 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_timer:
                 startActivity(new Intent(MainActivity.this, TimerActivity.class));
-                break;
-
-            default:
-                // some action
                 break;
         }
 

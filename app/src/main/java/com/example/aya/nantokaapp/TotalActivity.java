@@ -26,28 +26,33 @@ public class TotalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total);
 
+        initToolbar();
+
+        setTotalHistory();
+    }
+
+    private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         setMenuReturnButton();
-
-        displayLastMonth();
-        displayLastMonthTotal();
-        displayMoreOldTotal();
     }
 
     private void setMenuReturnButton() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void displayLastMonth() {
-        TextView text = (TextView) findViewById(R.id.last_month);
-        text.setText("先月（" + getLastMonth() + "月）、");
-    }
+    private void setTotalHistory() {
+        TextView lastMonthTextView = (TextView) findViewById(R.id.last_month);
+        lastMonthTextView.setText(getString(R.string.last_month, getLastMonth()));
 
-    private void displayLastMonthTotal() {
-        TextView text = (TextView) findViewById(R.id.last_month_fee_text);
-        text.setText(getPrefLastMonthTotal(getLastMonth()) + getString(R.string.yen));
+        TextView lastMonthTotalTextView = (TextView) findViewById(R.id.last_month_fee_text);
+        lastMonthTotalTextView.setText(getString(R.string.yen, getPrefLastMonthTotal(getLastMonth())));
+
+        ArrayAdapter<String> adapter
+                = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getMonthTotalList());
+        ListView monthTotalListView = (ListView) findViewById(R.id.total_listView);
+        monthTotalListView.setAdapter(adapter);
+        monthTotalListView.setEnabled(false);
     }
 
     public int getLastMonth() {
@@ -61,26 +66,18 @@ public class TotalActivity extends AppCompatActivity {
         return pref.getInt(String.valueOf(lastMonth), 0);
     }
 
-    private void displayMoreOldTotal() {
-        ArrayAdapter<String> adapter
-                = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getMonthTotalList());
-        ListView listView = (ListView) findViewById(R.id.total_listView);
-        listView.setAdapter(adapter);
-        listView.setEnabled(false);
-    }
-
     private List<String> getMonthTotalList() {
         List<String> monthTotalTextList = new ArrayList<>();
 
-        for (int i = 1; i <= 11; i++) {
+        for (int i = 1; i < 12; i++) {
             int month = getLastMonth() - i;
 
             if (month <= 0) {
                 month = month + 12;
             }
 
-            monthTotalTextList.add(month + getString(R.string.month_total)
-                    + "     " + getPrefTotal(month) + getString(R.string.yen));
+            monthTotalTextList.add(getString(R.string.month_total, month)
+                    + "     " + getString(R.string.yen, getPrefTotal(month)));
         }
 
         return monthTotalTextList;
@@ -93,7 +90,6 @@ public class TotalActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -104,9 +100,6 @@ public class TotalActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                break;
-
-            default:
                 break;
         }
 
