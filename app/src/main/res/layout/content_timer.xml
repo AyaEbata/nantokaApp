@@ -37,7 +37,8 @@
             android:textSize="@dimen/big_text"
             android:textColor="#333"
             android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:id="@+id/timer_text" />
 
         <TextView
             android:layout_width="match_parent"
@@ -65,7 +66,8 @@
                 android:background="@color/colorAccent"
                 android:textColor="@color/white"
                 android:layout_weight="0.3"
-                android:layout_marginRight="20dp" />
+                android:layout_marginRight="20dp"
+                android:id="@+id/start_button" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -75,7 +77,8 @@
                 android:background="@android:color/holo_orange_light"
                 android:textColor="@color/white"
                 android:layout_weight="0.3"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:id="@+id/cancel_button" />
 
         </LinearLayout>
 

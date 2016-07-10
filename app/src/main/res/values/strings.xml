@@ -13,7 +13,7 @@
     <string name="more_before_total">もっと前の合計</string>
     <string name="month_total">%d月の合計</string>
     <string name="before_comment">後、</string>
-    <string name="timer">00:00:00</string>
+    <string name="timer">%1$02d:%2$02d</string>
     <string name="after_comment">で、洗濯終わるよ"((*'ω'*))"</string>
     <string name="start_button">start</string>
     <string name="cancel_button">cancel</string>
