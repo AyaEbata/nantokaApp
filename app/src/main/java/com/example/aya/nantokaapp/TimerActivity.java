@@ -30,30 +30,7 @@ public class TimerActivity extends AppCompatActivity {
 
         initToolbar();
 
-        TextView timerTextView = (TextView) findViewById(R.id.timer_text);
-        timerTextView.setText(getString(R.string.timer, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND));
-
-        CountDownTimer countDownTimer = new CountDownTimer(DEFAULT_START_TIME_MS, ONE_MINUTE_SECOND){
-
-            @Override
-            public void onFinish(){
-                Toast.makeText(getApplicationContext(), "洗濯終わったよ！", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onTick(long millisUntilFinished){
-                timerTextView.setText(getString(R.string.timer, millisUntilFinished/ONE_SECOND, millisUntilFinished/ONE_MINUTE_SECOND%60));
-            }
-        };
-
-        Button startButton = (Button) findViewById(R.id.start_button);
-        startButton.setOnClickListener(view -> countDownTimer.start());
-
-        Button cancelButton = (Button) findViewById(R.id.cancel_button);
-        cancelButton.setOnClickListener(view -> {
-            countDownTimer.cancel();
-            timerTextView.setText(getString(R.string.timer, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND));
-        });
+        setCountDownTimer();
     }
 
     private void initToolbar() {
@@ -64,6 +41,39 @@ public class TimerActivity extends AppCompatActivity {
 
     private void setMenuReturnButton() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void setCountDownTimer() {
+        TextView timerTextView = (TextView) findViewById(R.id.timer_text);
+        initCountDownTimerText(timerTextView);
+
+        CountDownTimer countDownTimer = new CountDownTimer(DEFAULT_START_TIME_MS, ONE_MINUTE_SECOND){
+
+            @Override
+            public void onFinish(){
+                Toast.makeText(getApplicationContext(), "洗濯終わったよ！", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTick(long millisUntilFinished){
+                timerTextView.setText(getString(R.string.timer,
+                        millisUntilFinished/ONE_SECOND, millisUntilFinished/ONE_MINUTE_SECOND%60));
+            }
+        };
+
+        Button startButton = (Button) findViewById(R.id.start_button);
+        startButton.setOnClickListener(view -> countDownTimer.start());
+
+        Button cancelButton = (Button) findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(view -> {
+            countDownTimer.cancel();
+            initCountDownTimerText(timerTextView);
+        });
+    }
+
+    private void initCountDownTimerText(TextView timerTextView) {
+        timerTextView.setText(
+                getString(R.string.timer, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND));
     }
 
     @Override
