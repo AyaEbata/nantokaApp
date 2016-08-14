@@ -63,7 +63,9 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished){
                 timerTextView.setText(getString(R.string.timer,
-                        millisUntilFinished/ONE_MINUTE_MS/60, millisUntilFinished/ONE_MINUTE_MS%60, millisUntilFinished/ONE_MS%60));
+                        millisUntilFinished/ONE_MINUTE_MS/60,
+                        millisUntilFinished/ONE_MINUTE_MS%60,
+                        millisUntilFinished/ONE_MS%60));
             }
         };
 
