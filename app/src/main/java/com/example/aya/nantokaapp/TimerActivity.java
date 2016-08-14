@@ -49,7 +49,7 @@ public class TimerActivity extends AppCompatActivity {
 
     private void setCountDownTimer() {
         TextView timerTextView = (TextView) findViewById(R.id.timer_text);
-        initCountDownTimerText(timerTextView);
+        initCountDownTimerText(timerTextView, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND);
 
         CountDownTimer countDownTimer = new CountDownTimer(DEFAULT_START_TIME_MS, ONE_MINUTE_SECOND){
 
@@ -71,22 +71,24 @@ public class TimerActivity extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(view -> {
             countDownTimer.cancel();
-            initCountDownTimerText(timerTextView);
+            initCountDownTimerText(timerTextView, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND);
         });
     }
 
-    private void initCountDownTimerText(TextView timerTextView) {
+    private void initCountDownTimerText(TextView timerTextView, int startTimeMinute, int startTimeSecond) {
         timerTextView.setText(
-                getString(R.string.timer, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND));
+                getString(R.string.timer, startTimeMinute, startTimeSecond));
     }
 
     private void setTimePickerDialog() {
+        TextView timerTextView = (TextView) findViewById(R.id.timer_text);
+
         Calendar calendar = Calendar.getInstance();
         int nowHour = calendar.get(Calendar.HOUR_OF_DAY);
         int nowMinute = calendar.get(Calendar.MINUTE);
         TimePickerDialog dialog = new TimePickerDialog(
                 this,
-                (view, selectHour, selectMinute) -> System.out.println(selectHour + ":"+ selectMinute),
+                (view, selectHour, selectMinute) -> initCountDownTimerText(timerTextView, selectMinute, DEFAULT_START_TIME_SECOND),
                 nowHour,
                 nowMinute,
                 true);
