@@ -1,5 +1,6 @@
 package com.example.aya.nantokaapp;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 /**
  * Created by aya on 2016/05/05.
@@ -31,6 +34,7 @@ public class TimerActivity extends AppCompatActivity {
         initToolbar();
 
         setCountDownTimer();
+        setTimePickerDialog();
     }
 
     private void initToolbar() {
@@ -74,6 +78,22 @@ public class TimerActivity extends AppCompatActivity {
     private void initCountDownTimerText(TextView timerTextView) {
         timerTextView.setText(
                 getString(R.string.timer, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND));
+    }
+
+    private void setTimePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int nowHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int nowMinute = calendar.get(Calendar.MINUTE);
+        TimePickerDialog dialog = new TimePickerDialog(
+                this,
+                (view, selectHour, selectMinute) -> System.out.println(selectHour + ":"+ selectMinute),
+                nowHour,
+                nowMinute,
+                true);
+
+        TextView timerText = (TextView)findViewById(R.id.timer_text);
+        timerText.setClickable(true);
+        timerText.setOnClickListener(view -> dialog.show());
     }
 
     @Override
