@@ -33,7 +33,7 @@ public class TimerActivity extends AppCompatActivity {
 
         initToolbar();
 
-        setCountDownTimer();
+        setCountDownTimer(DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND);
         setTimePickerDialog();
     }
 
@@ -47,11 +47,11 @@ public class TimerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setCountDownTimer() {
+    private void setCountDownTimer(int startTimeMinute, int startTimeSecond) {
         TextView timerTextView = (TextView) findViewById(R.id.timer_text);
-        initCountDownTimerText(timerTextView, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND);
+        initCountDownTimerText(timerTextView, startTimeMinute, startTimeSecond);
 
-        CountDownTimer countDownTimer = new CountDownTimer(DEFAULT_START_TIME_MS, ONE_MINUTE_SECOND){
+        CountDownTimer countDownTimer = new CountDownTimer(startTimeMinute * ONE_SECOND, ONE_MINUTE_SECOND){
 
             @Override
             public void onFinish(){
@@ -71,7 +71,7 @@ public class TimerActivity extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(view -> {
             countDownTimer.cancel();
-            initCountDownTimerText(timerTextView, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND);
+            initCountDownTimerText(timerTextView, startTimeMinute, startTimeSecond);
         });
     }
 
@@ -81,14 +81,12 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void setTimePickerDialog() {
-        TextView timerTextView = (TextView) findViewById(R.id.timer_text);
-
         Calendar calendar = Calendar.getInstance();
         int nowHour = calendar.get(Calendar.HOUR_OF_DAY);
         int nowMinute = calendar.get(Calendar.MINUTE);
         TimePickerDialog dialog = new TimePickerDialog(
                 this,
-                (view, selectHour, selectMinute) -> initCountDownTimerText(timerTextView, selectMinute, DEFAULT_START_TIME_SECOND),
+                (view, selectHour, selectMinute) -> setCountDownTimer(selectMinute, DEFAULT_START_TIME_SECOND),
                 nowHour,
                 nowMinute,
                 true);
