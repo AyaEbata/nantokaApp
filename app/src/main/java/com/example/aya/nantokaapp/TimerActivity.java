@@ -20,11 +20,12 @@ import java.util.Calendar;
 public class TimerActivity extends AppCompatActivity {
 
 
+    private static final int DEFAULT_START_TIME_HOUR = 0;
     private static final int DEFAULT_START_TIME_MINUTE = 30;
     private static final int DEFAULT_START_TIME_SECOND = 0;
-    private static final int ONE_SECOND = 60000;
-    private static final int ONE_MINUTE_SECOND = 1000;
-    private static final int DEFAULT_START_TIME_MS = DEFAULT_START_TIME_MINUTE * ONE_SECOND;
+    private static final int ONE_MINUTE_MS = 60000;
+    private static final int ONE_HOUR = 60;
+    private static final int ONE_MS = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class TimerActivity extends AppCompatActivity {
 
         initToolbar();
 
-        setCountDownTimer(DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND);
+        setCountDownTimer(DEFAULT_START_TIME_HOUR, DEFAULT_START_TIME_MINUTE, DEFAULT_START_TIME_SECOND);
         setTimePickerDialog();
     }
 
@@ -47,11 +48,12 @@ public class TimerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setCountDownTimer(int startTimeMinute, int startTimeSecond) {
+    private void setCountDownTimer(int startTimeHour, int startTimeMinute, int startTimeSecond) {
         TextView timerTextView = (TextView) findViewById(R.id.timer_text);
-        initCountDownTimerText(timerTextView, startTimeMinute, startTimeSecond);
+        initCountDownTimerText(timerTextView, startTimeHour, startTimeMinute, startTimeSecond);
 
-        CountDownTimer countDownTimer = new CountDownTimer(startTimeMinute * ONE_SECOND, ONE_MINUTE_SECOND){
+        CountDownTimer countDownTimer
+                = new CountDownTimer((startTimeHour * ONE_HOUR + startTimeMinute) * ONE_MINUTE_MS, ONE_MS){
 
             @Override
             public void onFinish(){
@@ -61,7 +63,7 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished){
                 timerTextView.setText(getString(R.string.timer,
-                        millisUntilFinished/ONE_SECOND, millisUntilFinished/ONE_MINUTE_SECOND%60));
+                        millisUntilFinished/ONE_MINUTE_MS/60, millisUntilFinished/ONE_MINUTE_MS%60, millisUntilFinished/ONE_MS%60));
             }
         };
 
@@ -71,13 +73,14 @@ public class TimerActivity extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(view -> {
             countDownTimer.cancel();
-            initCountDownTimerText(timerTextView, startTimeMinute, startTimeSecond);
+            initCountDownTimerText(timerTextView, startTimeHour, startTimeMinute, startTimeSecond);
         });
     }
 
-    private void initCountDownTimerText(TextView timerTextView, int startTimeMinute, int startTimeSecond) {
+    private void initCountDownTimerText(
+            TextView timerTextView, int startTimeHour, int startTimeMinute, int startTimeSecond) {
         timerTextView.setText(
-                getString(R.string.timer, startTimeMinute, startTimeSecond));
+                getString(R.string.timer, startTimeHour, startTimeMinute, startTimeSecond));
     }
 
     private void setTimePickerDialog() {
@@ -86,7 +89,8 @@ public class TimerActivity extends AppCompatActivity {
         int nowMinute = calendar.get(Calendar.MINUTE);
         TimePickerDialog dialog = new TimePickerDialog(
                 this,
-                (view, selectHour, selectMinute) -> setCountDownTimer(selectMinute, DEFAULT_START_TIME_SECOND),
+                (view, selectHour, selectMinute)
+                        -> setCountDownTimer(selectHour, selectMinute, DEFAULT_START_TIME_SECOND),
                 nowHour,
                 nowMinute,
                 true);
