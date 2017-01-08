@@ -17,7 +17,70 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/before_comment"
+            android:textSize="@dimen/default_text"
+            android:layout_weight="0.03"
+            android:layout_marginTop="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/timer"
+            android:layout_weight="0.03"
+            android:textSize="@dimen/big_text"
+            android:textColor="#333"
+            android:gravity="center_horizontal"
+            android:id="@+id/timer_text"
+            android:layout_marginBottom="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/after_comment"
+            android:textSize="@dimen/default_text"
+            android:layout_weight="0.03"
+            android:layout_gravity="center_horizontal"
+            android:gravity="right"
+            android:layout_marginBottom="80dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:gravity="center_horizontal"
+            android:layout_weight="0">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_button"
+                android:background="@color/colorAccent"
+                android:textColor="@color/white"
+                android:layout_weight="0.3"
+                android:layout_marginRight="20dp"
+                android:id="@+id/start_button" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_button"
+                android:background="@android:color/holo_orange_light"
+                android:textColor="@color/white"
+                android:layout_weight="0.3"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/cancel_button" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
